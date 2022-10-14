@@ -1,31 +1,46 @@
 console.clear()
 const fs = require('fs')
-const codeUserPath = process.env.APPDATA + '/Code/User/'
-const copyToInsider = input => {
-  const output = input.replace('/Code/User/', '/Code - Insiders/User/')
-  fs.copyFileSync(input, output)
+const path = require('path')
+
+const getInsiderPath = input => {
+  return input.replace('Code', 'Code - Insiders')
 }
 
+const readFile = (fileName, dir = codeUserPath) => {
+  const rawData = fs.readFileSync(path.join(dir, fileName), 'utf-8')
+  return JSON.parse(rawData)
+}
+
+const writeFile = (fileName, data) => {
+  const dataStr = JSON.stringify(data)
+  fs.writeFileSync(path.join(insiderUserPath, fileName), dataStr)
+}
+
+const codeUserPath = path.join(process.env.APPDATA + '/Code/User/')
+const insiderUserPath = getInsiderPath(codeUserPath)
 const files = {
   keybindings: 'keybindings.json',
   settings: 'settings.json',
 }
 
-const dirs = {
-  snippets: 'snippets',
-}
+const [extraKeybindings, extraSettings] = Object.values(files).map(fileName =>
+  readFile(fileName, __dirname)
+)
 
-for (let key in files) {
-  copyToInsider(codeUserPath + files[key])
-}
+;(() => {
+  const settings = readFile(files.settings)
+  Object.assign(settings, extraSettings)
+  writeFile(files.settings, settings)
 
-for (let key in dirs) {
-  const path = codeUserPath + dirs[key]
-  const dir = fs.readdirSync(path)
+  const keybindings = readFile(files.keybindings)
+  keybindings.push(...extraKeybindings)
+  writeFile(files.keybindings, keybindings)
+
+  const dirPath = path.join(codeUserPath, 'snippets/')
+  const dir = fs.readdirSync(dirPath)
   dir.forEach(item => {
-    const filePath = path + '/' + item
-    if (fs.lstatSync(filePath).isFile()) {
-      copyToInsider(filePath)
-    }
+    const filePath = path.join(dirPath, item)
+    if (!fs.lstatSync(filePath).isFile()) return
+    fs.copyFileSync(filePath, getInsiderPath(filePath))
   })
-}
+})()

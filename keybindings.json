@@ -1,0 +1,66 @@
+[
+  { "key": "", "command": "-tabnine.accept-inline-suggestion" },
+  { "key": "", "command": "-commentsClearFilterText" },
+  { "key": "", "command": "-list.closeFind" },
+  { "key": "", "command": "-tabnine.escape-inline-suggestion" },
+  { "key": "", "command": "-tabnine.escape-inline-suggestion" },
+  { "key": "", "command": "-tabnine.next-inline-suggestion" },
+  { "key": "", "command": "-tabnine.prev-inline-suggestion" },
+  { "key": "", "command": "-tabnine.snippet-suggestion" },
+  { "key": "", "command": "-tabnine.tab-override" },
+  {
+    "key": "",
+    "command": "-workbench.action.terminal.navigationModeFocusPreviousPage"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.terminal.navigationModeFocusNextPage"
+  },
+  { "key": "", "command": "-editor.createFoldingRangeFromSelection" },
+  { "key": "", "command": "-workbench.action.debug.nextConsole" },
+  { "key": "", "command": "-workbench.action.debug.prevConsole" },
+  { "key": "", "command": "-workbench.action.debug.stepIntoTarget" },
+  { "key": "", "command": "-editor.detectLanguage" },
+  { "key": "", "command": "-notebook.cell.detectLanguage" },
+  { "key": "", "command": "-editor.removeManualFoldingRanges" },
+  { "key": "", "command": "-acceptSelectedCodeAction" },
+  { "key": "", "command": "-commentsFocusFilter" },
+  { "key": "", "command": "-commentsFocusViewFromFilter" },
+  { "key": "", "command": "-hideCodeActionWidget" },
+  { "key": "", "command": "-list.find" },
+  { "key": "", "command": "-previewSelectedCodeAction" },
+  { "key": "", "command": "-selectNextCodeAction" },
+  { "key": "", "command": "-selectPrevCodeAction" },
+  { "key": "", "command": "-issue.createIssueFromFile" },
+  { "key": "", "command": "-issue.suggestRefresh" },
+  {
+    "key": "enter",
+    "command": "acceptSelectedCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "up",
+    "command": "selectPrevCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  {
+    "key": "down",
+    "command": "selectNextCodeAction",
+    "when": "codeActionMenuVisible"
+  },
+  { "key": "alt+o", "command": "github.codespaces.connect" },
+  { "key": "alt+n", "command": "github.codespaces.addEnvironment" },
+  { "key": "shift+alt+q", "command": "github.codespaces.deleteEnvironment" },
+  { "key": "alt+q", "command": "github.codespaces.disconnectSuspend" },
+  { "key": "alt+w", "command": "github.codespaces.disconnectEnvironment" },
+  {
+    "key": "escape",
+    "command": "commentsClearFilterText",
+    "when": "commentsFilterFocus"
+  },
+  {
+    "key": "escape",
+    "command": "list.closeFind",
+    "when": "listFocus && treeFindOpen"
+  }
+]
