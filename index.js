@@ -41,6 +41,10 @@ const [extraKeybindings, extraSettings] = Object.values(files).map(fileName =>
   dir.forEach(item => {
     const filePath = path.join(dirPath, item)
     if (!fs.lstatSync(filePath).isFile()) return
+    const insiderDirPath = getInsiderPath(dirPath)
+    if (!fs.existsSync(insiderDirPath)) {
+      fs.mkdirSync(insiderDirPath)
+    }
     fs.copyFileSync(filePath, getInsiderPath(filePath))
   })
 })()
